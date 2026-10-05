@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Josue&#x27;s Mexican Tacos | Menú en línea (demo)</title>
+<meta name="description" content="¡Puro sabor mexicano! Tacos, burritos y combos en Valle Dorado.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display: 'Bowlby One', 'Arial Black', sans-serif;
+  --font-body: 'Nunito Sans', system-ui, sans-serif;
+  --display-weight: 400;
+  --h1-size: clamp(40px, 11.5vw, 64px);
+  --h1-track: 0;
+  --h2-size: 28px;
+  --hero-pad: 26px var(--gutter) 34px;
+  --bg: #FFF4CC;
+  --surface: #FFFFFF;
+  --ink: #1A1A1A;
+  --ink-soft: #4A4636;
+  --heading: #1A1A1A;
+  --hero-bg: #FFC72C;
+  --hero-ink: #1A1A1A;
+  --hero-soft: #2B2A22;
+  --hero-line: #1A1A1A;
+  --note-bg: #1A1A1A;
+  --note-ink: #FFF4CC;
+  --status-bg: #1A1A1A;
+  --status-ink: #FFFFFF;
+  --open: #7BD67F;
+  --closed: #FF8A80;
+  --chip-bg: #C62828;
+  --chip-ink: #FFFFFF;
+  --accent: #2E7D32;
+  --accent-ink: #FFFFFF;
+  --focus: #C62828;
+  --line: #F2DC8C;
+  --line-strong: #D9B94A;
+  --card-line: #F6E7AE;
+  --tab-on: #C62828;
+  --tab-on-ink: #FFFFFF;
+  --price: #A61F1F;
+  --add-bg: #2E7D32;
+  --add-ink: #FFFFFF;
+  --step-bg: #E5F2E5;
+  --step-ink: #1E5A22;
+  --ph-bg: radial-gradient(#F2C94C 1.6px, transparent 1.7px) 0 0/12px 12px, #FFF4CC;
+  --ph-ink: #6B5410;
+  --panel-bg: #2E7D32;
+  --panel-ink: #FFFFFF;
+  --panel-soft: #E5F2E5;
+  --bar-bg: #C62828;
+  --bar-ink: #FFFFFF;
+  --bar-shadow: rgba(198,40,40,.35);
+  --radius-sm: 10px;
+  --radius-lg: 18px;
+  --gutter: 16px;
+  --bar-h: 64px;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:64px;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.5;padding-bottom:calc(var(--bar-h) + 24px)}
+img,svg{display:block}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+
+.demo-note{background:var(--note-bg);color:var(--note-ink);font-size:13px;line-height:1.4;text-align:center;padding:8px var(--gutter)}
+
+/* Hero */
+.hero{position:relative;background:var(--hero-bg);color:var(--hero-ink);overflow:hidden}
+.hero-inner{position:relative;z-index:2;max-width:640px;margin:0 auto;padding:var(--hero-pad)}
+.hero h1{font-family:var(--font-display);font-weight:var(--display-weight);font-size:var(--h1-size);line-height:1.02;letter-spacing:var(--h1-track)}
+.tagline{margin-top:12px;font-size:17px;max-width:34ch;color:var(--hero-soft)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;padding:6px 12px 6px 10px;border-radius:999px;background:var(--status-bg);color:var(--status-ink)}
+.status .dot{width:9px;height:9px;border-radius:50%;background:var(--closed)}
+.status.is-open .dot{background:var(--open)}
+.chip{display:inline-flex;align-items:center;font-size:14px;font-weight:600;padding:6px 12px;border-radius:999px;background:var(--chip-bg);color:var(--chip-ink)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border-radius:999px;font-weight:700;font-size:16px;text-decoration:none;border:2px solid transparent;transition:transform .15s ease, filter .15s ease}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-secondary{border-color:var(--hero-line);color:var(--hero-ink)}
+@media (hover:hover){.btn:hover{filter:brightness(1.06)}}
+
+/* Tabs */
+.tabs{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabs-inner{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;max-width:640px;margin:0 auto;padding:10px var(--gutter)}
+.tabs-inner::-webkit-scrollbar{display:none}
+.tab{flex:none;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line-strong);background:transparent;font-weight:600;font-size:15px;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;transition:background .2s ease,color .2s ease,border-color .2s ease}
+.tab[aria-current="true"]{background:var(--tab-on);border-color:var(--tab-on);color:var(--tab-on-ink)}
+
+/* Menu */
+main{max-width:640px;margin:0 auto;padding:8px var(--gutter) 0}
+.cat{padding-top:24px}
+.cat h2{font-family:var(--font-display);font-weight:var(--display-weight);font-size:var(--h2-size);line-height:1.1;margin-bottom:14px;color:var(--heading)}
+.dishes{list-style:none;padding:0;display:grid;gap:12px}
+.dish{display:grid;grid-template-columns:104px 1fr;gap:14px;background:var(--surface);border-radius:var(--radius-lg);padding:10px;border:1px solid var(--card-line)}
+.ph{aspect-ratio:1;border-radius:var(--radius-sm);background:var(--ph-bg);color:var(--ph-ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:12px;font-weight:600;text-align:center;line-height:1.2;padding:6px}
+.dish-body{display:flex;flex-direction:column;min-width:0;padding:2px 2px 0 0}
+.dish h3{font-size:17px;line-height:1.25;font-weight:700}
+.dish p{font-size:14px;color:var(--ink-soft);margin-top:4px}
+.dish-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:8px}
+.price{font-weight:700;color:var(--price);font-size:16px}
+.add{width:44px;height:44px;border-radius:50%;border:0;background:var(--add-bg);color:var(--add-ink);font-size:24px;line-height:1;display:grid;place-items:center;transition:transform .15s ease}
+.add:active{transform:scale(.9)}
+.stepper{display:none;align-items:center;gap:2px;background:var(--step-bg);border-radius:999px;padding:2px}
+.stepper button{width:40px;height:40px;border-radius:50%;border:0;background:transparent;font-size:20px;font-weight:700;color:var(--step-ink)}
+.stepper output{min-width:20px;text-align:center;font-weight:700;color:var(--step-ink)}
+.dish.in-cart .add{display:none}
+.dish.in-cart .stepper{display:flex}
+
+/* Info */
+.info{max-width:640px;margin:32px auto 0;padding:0 var(--gutter);display:grid;gap:12px}
+.panel{background:var(--panel-bg);color:var(--panel-ink);border-radius:var(--radius-lg);padding:20px}
+.panel h2{font-family:var(--font-display);font-weight:var(--display-weight);font-size:22px;margin-bottom:8px}
+.panel p{color:var(--panel-soft)}
+.panel .btn{margin-top:14px}
+.panel-light{background:var(--surface);color:var(--ink);border:1px solid var(--card-line)}
+.hours{list-style:none;padding:0;margin-top:4px}
+.hours li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--card-line);font-size:15px}
+.hours li:last-child{border-bottom:0}
+.hours li.today{font-weight:700;color:var(--heading)}
+.social{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.social a{min-height:44px;display:inline-flex;align-items:center;padding:0 16px;border-radius:999px;border:1.5px solid var(--line-strong);font-weight:600;text-decoration:none}
+footer{max-width:640px;margin:28px auto 0;padding:0 var(--gutter);font-size:13px;color:var(--ink-soft);text-align:center}
+
+/* Order bar + sheet */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));pointer-events:none}
+.bar button{pointer-events:auto;width:100%;max-width:608px;margin:0 auto;min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 20px;border:0;border-radius:999px;background:var(--bar-bg);color:var(--bar-ink);font-weight:700;font-size:16px;box-shadow:0 8px 24px var(--bar-shadow);transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.bar button{visibility:hidden}
+.bar.show button{transform:none;visibility:visible}
+.count{background:var(--bar-ink);color:var(--bar-bg);border-radius:999px;min-width:28px;height:28px;display:grid;place-items:center;font-size:14px;padding:0 8px}
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(10,14,30,.45);opacity:0;pointer-events:none;transition:opacity .25s ease}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:50;max-height:86vh;overflow:auto;background:var(--surface);color:var(--ink);border-radius:22px 22px 0 0;padding:10px var(--gutter) calc(20px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .35s cubic-bezier(.2,.8,.2,1);max-width:640px;margin:0 auto}
+.open .scrim{opacity:1;pointer-events:auto}
+.open .sheet{transform:none}
+.grip{width:40px;height:5px;border-radius:3px;background:var(--line-strong);margin:0 auto 12px}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sheet h2{font-family:var(--font-display);font-weight:var(--display-weight);font-size:24px}
+.close{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line-strong);background:transparent;font-size:22px;line-height:1}
+.lines{list-style:none;padding:0;margin:12px 0}
+.lines li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--card-line)}
+.lines .stepper{display:flex}
+.empty{color:var(--ink-soft);padding:16px 0}
+label.note{display:block;font-weight:600;font-size:15px;margin-top:6px}
+textarea{width:100%;margin-top:6px;min-height:80px;border-radius:var(--radius-sm);border:1.5px solid var(--line-strong);padding:10px 12px;font:inherit;background:var(--bg);color:var(--ink);resize:vertical}
+.send{width:100%;margin-top:14px;min-height:52px}
+.fine{font-size:13px;color:var(--ink-soft);margin-top:10px;text-align:center}
+
+/* Entrance moment */
+@media (prefers-reduced-motion:no-preference){
+  .hero-inner > *{animation:rise .6s cubic-bezier(.2,.8,.2,1) both}
+  .hero-inner > :nth-child(2){animation-delay:.08s}
+  .hero-inner > :nth-child(3){animation-delay:.16s}
+  .hero-inner > :nth-child(4){animation-delay:.24s}
+  .hero-inner > :nth-child(5){animation-delay:.3s}
+}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}
+}
+
+/* Brand-specific */
+.picado{position:relative;z-index:2;display:flex;justify-content:center;gap:6px;padding-top:10px;overflow:hidden;border-top:2px solid #1A1A1A}
+.picado::before{content:"";position:absolute;left:0;right:0;top:8px;height:2px;background:#1A1A1A}
+.flag{flex:none;width:44px;height:52px;position:relative;
+  clip-path:polygon(0 0,100% 0,100% 82%,87.5% 100%,75% 82%,62.5% 100%,50% 82%,37.5% 100%,25% 82%,12.5% 100%,0 82%);
+  -webkit-mask:radial-gradient(circle at 50% 38%,transparent 5px,#000 5.5px),
+               radial-gradient(circle at 20% 38%,transparent 2.5px,#000 3px),
+               radial-gradient(circle at 80% 38%,transparent 2.5px,#000 3px);
+  -webkit-mask-composite:source-in;mask-composite:intersect}
+.flag.f0{background:#C62828}.flag.f1{background:#2E7D32}.flag.f2{background:#FFFFFF}.flag.f3{background:#1A1A1A}
+@media (prefers-reduced-motion:no-preference){.flag{transform-origin:top center;animation:sway 1.2s ease-out both}.flag:nth-child(odd){animation-delay:.08s}}
+@keyframes sway{0%{transform:rotate(-4deg)}60%{transform:rotate(2deg)}100%{transform:none}}
+.hero h1{margin-top:18px}
+</style>
+</head>
+<body>
+<div class="demo-note">Demo de ejemplo. Las fotos y los precios se reemplazan con los del restaurante.</div>
+
+<header class="hero">
+<div class="picado" aria-hidden="true"><span class="flag f0"></span><span class="flag f1"></span><span class="flag f2"></span><span class="flag f3"></span><span class="flag f0"></span><span class="flag f1"></span><span class="flag f2"></span><span class="flag f3"></span><span class="flag f0"></span><span class="flag f1"></span><span class="flag f2"></span><span class="flag f3"></span><span class="flag f0"></span><span class="flag f1"></span></div>
+  <div class="hero-inner">
+    <h1>Josue’s<br>Mexican Tacos</h1>
+    <p class="tagline">¡Puro sabor mexicano! Tacos, burritos y combos en Valle Dorado.</p>
+    <div class="meta"><p class="status" id="status" role="status"><span class="dot" aria-hidden="true"></span><span id="status-text">Horario</span></p><span class="chip">Delivery gratis en Linda Vista</span></div>
+    <div class="actions">
+      <a class="btn btn-primary" href="https://wa.me/50588674315?text=Hola%20Josue%27s%20Mexican%20Tacos%2C%20quiero%20hacer%20un%20pedido." target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3 1 2.5c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.1-.1z"/></svg>Pedir por WhatsApp</a>
+      <a class="btn btn-secondary" href="https://www.google.com/maps/search/?api=1&query=Josue%27s%20Mexican%20Tacos%20Managua&query_place_id=ChIJY9UktodXcY8R_gDicneKZTQ" target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Cómo llegar</a>
+    </div>
+  </div>
+
+</header>
+
+<nav class="tabs" aria-label="Categorías del menú"><div class="tabs-inner"><a class="tab" href="#cat-0" aria-current="true">Tacos</a><a class="tab" href="#cat-1" aria-current="false">Burritos</a><a class="tab" href="#cat-2" aria-current="false">Hamburguesas</a><a class="tab" href="#cat-3" aria-current="false">Combos</a></div></nav>
+
+<main>
+<section class="cat" id="cat-0" aria-labelledby="cat-0-h"><h2 id="cat-0-h">Tacos</h2><ul class="dishes"><li class="dish" data-id="0-0"><div class="ph" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.6"/></svg><span>Su foto aquí</span></div><div class="dish-body"><h3>Tacos mixtos</h3><p>Orden de 6 tacos con cebolla, culantro y salsa.</p><div class="dish-foot"><span class="price" aria-label="Precio por definir">C$ —</span><button type="button" class="add" aria-label="Agregar Tacos mixtos">+</button><span class="stepper" data-id="0-0"><button type="button" data-act="dec" aria-label="Quitar uno de Tacos mixtos">−</button><output aria-live="polite">0</output><button type="button" data-act="inc" aria-label="Agregar otro Tacos mixtos">+</button></span></div></div></li><li class="dish" data-id="0-1"><div class="ph" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.6"/></svg><span>Su foto aquí</span></div><div class="dish-body"><h3>Tacos de res</h3><p>Orden de 6 tacos de res en tortilla de maíz.</p><div class="dish-foot"><span class="price" aria-label="Precio por definir">C$ —</span><button type="button" class="add" aria-label="Agregar Tacos de res">+</button><span class="stepper" data-id="0-1"><button type="button" data-act="dec" aria-label="Quitar uno de Tacos de res">−</button><output aria-live="polite">0</output><button type="button" data-act="inc" aria-label="Agregar otro Tacos de res">+</button></span></div></div></li></ul></section>
+<section class="cat" id="cat-1" aria-labelledby="cat-1-h"><h2 id="cat-1-h">Burritos</h2><ul class="dishes"><li class="dish" data-id="1-0"><div class="ph" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.6"/></svg><span>Su foto aquí</span></div><div class="dish-body"><h3>Burrito de res</h3><p>Tortilla de harina rellena de res, frijoles y arroz.</p><div class="dish-foot"><span class="price" aria-label="Precio por definir">C$ —</span><button type="button" class="add" aria-label="Agregar Burrito de res">+</button><span class="stepper" data-id="1-0"><button type="button" data-act="dec" aria-label="Quitar uno de Burrito de res">−</button><output aria-live="polite">0</output><button type="button" data-act="inc" aria-label="Agregar otro Burrito de res">+</button></span></div></div></li></ul></section>
+<section class="cat" id="cat-2" aria-labelledby="cat-2-h"><h2 id="cat-2-h">Hamburguesas</h2><ul class="dishes"><li class="dish" data-id="2-0"><div class="ph" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.6"/></svg><span>Su foto aquí</span></div><div class="dish-body"><h3>Hamburguesa de la casa</h3><p>Carne a la plancha con vegetales y papas.</p><div class="dish-foot"><span class="price" aria-label="Precio por definir">C$ —</span><button type="button" class="add" aria-label="Agregar Hamburguesa de la casa">+</button><span class="stepper" data-id="2-0"><button type="button" data-act="dec" aria-label="Quitar uno de Hamburguesa de la casa">−</button><output aria-live="polite">0</output><button type="button" data-act="inc" aria-label="Agregar otro Hamburguesa de la casa">+</button></span></div></div></li></ul></section>
+<section class="cat" id="cat-3" aria-labelledby="cat-3-h"><h2 id="cat-3-h">Combos</h2><ul class="dishes"><li class="dish" data-id="3-0"><div class="ph" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.6"/></svg><span>Su foto aquí</span></div><div class="dish-body"><h3>Combo para compartir</h3><p>Tacos, burrito y bebida, ideal para pedir a domicilio.</p><div class="dish-foot"><span class="price" aria-label="Precio por definir">C$ —</span><button type="button" class="add" aria-label="Agregar Combo para compartir">+</button><span class="stepper" data-id="3-0"><button type="button" data-act="dec" aria-label="Quitar uno de Combo para compartir">−</button><output aria-live="polite">0</output><button type="button" data-act="inc" aria-label="Agregar otro Combo para compartir">+</button></span></div></div></li></ul></section>
+</main>
+
+<section class="info" aria-label="Información del restaurante">
+  <div class="panel">
+    <h2>Dónde estamos</h2>
+    <p>Valle Dorado, casa E-18. De donde fue el restaurante Aragón, 1 cuadra abajo, 1 cuadra al lago, ½ cuadra abajo, Managua.</p>
+    <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Josue%27s%20Mexican%20Tacos%20Managua&query_place_id=ChIJY9UktodXcY8R_gDicneKZTQ" target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Abrir en Google Maps</a>
+  </div>
+  <div class="panel panel-light">
+    <h2>Horario</h2>
+    <ul class="hours" id="hours"></ul>
+  </div>
+  <div class="panel panel-light">
+    <h2>Síganos</h2>
+    <div class="social"><a href="https://www.tiktok.com/@josues.mexican.ta" target="_blank" rel="noopener">TikTok</a></div>
+  </div>
+</section>
+
+<footer>Demo preparada por [Tu nombre] para Josue&#x27;s Mexican Tacos.</footer>
+
+<div class="bar" id="bar"><button type="button" id="open-order" aria-haspopup="dialog"><span>Ver mi pedido</span><span class="count" id="count">0</span></button></div>
+
+<div id="layer">
+  <div class="scrim" id="scrim"></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" id="sheet" hidden>
+    <div class="grip" aria-hidden="true"></div>
+    <div class="sheet-head"><h2 id="sheet-title">Mi pedido</h2><button type="button" class="close" id="close" aria-label="Cerrar pedido">×</button></div>
+    <ul class="lines" id="lines"></ul>
+    <label class="note" for="note">Nota para el restaurante (opcional)</label>
+    <textarea id="note" placeholder="Ej.: sin cebolla, salsa aparte, dirección de entrega…"></textarea>
+    <a class="btn btn-primary send" id="send" href="#" target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3 1 2.5c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.1-.1z"/></svg>Enviar pedido por WhatsApp</a>
+    <p class="fine">Se abre WhatsApp con su pedido ya escrito.</p>
+  </div>
+</div>
+
+<script>
+const BIZ = {"name": "Josue's Mexican Tacos", "wa": "50588674315", "hours": [[1020, 1290], null, [1020, 1290], [1020, 1290], [1020, 1290], [1020, 1290], [1020, 1290]], "items": {"0-0": {"name": "Tacos mixtos"}, "0-1": {"name": "Tacos de res"}, "1-0": {"name": "Burrito de res"}, "2-0": {"name": "Hamburguesa de la casa"}, "3-0": {"name": "Combo para compartir"}}};
+const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];
+const cart = new Map();
+
+function fmt(min){let h=Math.floor(min/60),m=min%60;const ap=h>=12?"p. m.":"a. m.";h=h%12||12;return h+":"+String(m).padStart(2,"0")+" "+ap}
+function managuaNow(){const d=new Date(Date.now()-6*3600*1000);return {day:(d.getUTCDay()+6)%7,min:d.getUTCHours()*60+d.getUTCMinutes()}}
+
+(function hours(){
+  const {day,min}=managuaNow();
+  const ul=document.getElementById("hours");
+  BIZ.hours.forEach((h,i)=>{
+    const li=document.createElement("li");if(i===day)li.className="today";
+    li.innerHTML="<span>"+DAYS[i]+(i===day?" (hoy)":"")+"</span><span>"+(h?fmt(h[0])+" a "+fmt(h[1]):"Cerrado")+"</span>";
+    ul.appendChild(li);
+  });
+  const today=BIZ.hours[day];const st=document.getElementById("status");const tx=document.getElementById("status-text");
+  if(today&&min>=today[0]&&min<today[1]){st.classList.add("is-open");tx.textContent="Abierto ahora, cierra a las "+fmt(today[1]);return}
+  if(today&&min<today[0]){tx.textContent="Cerrado, abre hoy a las "+fmt(today[0]);return}
+  for(let k=1;k<=7;k++){const d=(day+k)%7,h=BIZ.hours[d];if(h){tx.textContent="Cerrado, abre "+(k===1?"mañana":"el "+DAYS[d].toLowerCase())+" a las "+fmt(h[0]);return}}
+})();
+
+// Tabs: highlight the section in view
+const tabs=[...document.querySelectorAll(".tab")];
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){tabs.forEach(t=>t.setAttribute("aria-current",t.getAttribute("href")==="#"+e.target.id?"true":"false"))}})},{rootMargin:"-30% 0px -60% 0px"});
+document.querySelectorAll(".cat").forEach(s=>io.observe(s));
+
+function total(){let n=0;cart.forEach(v=>n+=v);return n}
+function setQty(id,q){
+  if(q<=0)cart.delete(id);else cart.set(id,q);
+  document.querySelectorAll('[data-id="'+id+'"]').forEach(el=>{
+    el.classList.toggle("in-cart",q>0);
+    el.querySelectorAll("output").forEach(o=>o.textContent=Math.max(q,0));
+  });
+  const n=total();document.getElementById("count").textContent=n;
+  document.getElementById("bar").classList.toggle("show",n>0);
+  renderLines();
+}
+function stepperHTML(id,q,name){return '<span class="stepper" data-id="'+id+'"><button type="button" data-act="dec" aria-label="Quitar uno de '+name+'">−</button><output aria-live="polite">'+q+'</output><button type="button" data-act="inc" aria-label="Agregar otro '+name+'">+</button></span>'}
+function renderLines(){
+  const ul=document.getElementById("lines");ul.innerHTML="";
+  if(!cart.size){ul.innerHTML='<li class="empty">Todavía no ha agregado platos.</li>'}
+  cart.forEach((q,id)=>{const it=BIZ.items[id];const li=document.createElement("li");li.innerHTML="<span>"+it.name+"</span>"+stepperHTML(id,q,it.name);ul.appendChild(li)});
+  updateSend();
+}
+function updateSend(){
+  let msg="Hola "+BIZ.name+", quiero hacer un pedido:\n";
+  cart.forEach((q,id)=>{msg+="- "+q+" x "+BIZ.items[id].name+"\n"});
+  const note=document.getElementById("note").value.trim();if(note)msg+="\nNota: "+note;
+  document.getElementById("send").href="https://wa.me/"+BIZ.wa+"?text="+encodeURIComponent(msg);
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;
+  if(b.classList.contains("add")){const id=b.closest(".dish").dataset.id;setQty(id,(cart.get(id)||0)+1);const s=b.closest(".dish").querySelector(".stepper button[data-act=inc]");s&&s.focus();return}
+  const act=b.dataset.act;if(act){const id=b.closest("[data-id]").dataset.id;setQty(id,(cart.get(id)||0)+(act==="inc"?1:-1))}
+});
+document.getElementById("note").addEventListener("input",updateSend);
+
+const layer=document.getElementById("layer"),sheet=document.getElementById("sheet"),opener=document.getElementById("open-order");
+function openSheet(){sheet.hidden=false;requestAnimationFrame(()=>layer.classList.add("open"));document.getElementById("close").focus()}
+function closeSheet(){layer.classList.remove("open");setTimeout(()=>{sheet.hidden=true},300);opener.focus()}
+opener.addEventListener("click",openSheet);
+document.getElementById("close").addEventListener("click",closeSheet);
+document.getElementById("scrim").addEventListener("click",closeSheet);
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&layer.classList.contains("open"))closeSheet()});
+renderLines();
+</script>
+</body>
+</html>
